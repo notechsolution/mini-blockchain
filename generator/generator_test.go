@@ -1,8 +1,11 @@
 package generator
 
 import (
+	"reflect"
 	"testing"
+
 	"../model"
+	"go/doc"
 )
 
 func TestCalculateHash(t *testing.T) {
