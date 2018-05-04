@@ -8,6 +8,8 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 	"time"
+	"encoding/json"
+	"io"
 )
 
 type Block model.Block;
@@ -50,10 +52,14 @@ func run() error {
 
 func makeMuxRouter() http.Handler {
 	muxRouter := mux.NewRouter();
-	muxRouter.HandleFunc("/", handleGetBlockchain);
+	muxRouter.HandleFunc("/", handleGetBlockchain).Methods("GET");
 	return muxRouter;
 }
 func handleGetBlockchain(writer http.ResponseWriter, request *http.Request) {
-	result := "hello blockchain server";
-	writer.Write([]byte(result));
+	bytes, err := json.MarshalIndent(Blockchain,"", " ");
+	if err != nil {
+		http.Error(writer,err.Error(), http.StatusInternalServerError);
+		return;
+	}
+	io.WriteString(writer, string(bytes));
 }
