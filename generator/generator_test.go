@@ -2,13 +2,13 @@ package generator
 
 import (
 	"testing"
-
+	"../model"
 )
 
 
 func TestCalculateHash(t *testing.T) {
 	type args struct {
-		block Block
+		block model.Block
 	}
 	tests := []struct {
 		name string
@@ -18,7 +18,7 @@ func TestCalculateHash(t *testing.T) {
 		{
 			name: "generate hash string correctly",
 			args: args{
-				block: Block{
+				block: model.Block{
 					BPM:       10,
 					Index:     6,
 					Timestamp: "2334455666",

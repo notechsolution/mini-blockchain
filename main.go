@@ -2,6 +2,7 @@ package main
 
 import (
 	"./model"
+	"./generator"
 	"os"
 	"log"
 	"net/http"
@@ -12,9 +13,8 @@ import (
 	"io"
 )
 
-type Block model.Block;
 
-var Blockchain []Block;
+var Blockchain []model.Block;
 
 func main() {
 	err := godotenv.Load("config.env")
@@ -26,12 +26,16 @@ func main() {
 }
 
 func initialGenesisBlock() {
-	var genesis Block;
+	var genesis model.Block;
 	genesis.Index = 0;
-
+	genesis.BPM = 0;
+	genesis.Timestamp = time.Now().String();
+	genesis.PrevHash = "0000000000000000000000000000000000000000000000000000000000000000"
+	genesis.Hash = generator.CalculateHash(genesis);
+	Blockchain = append(Blockchain, genesis);
 }
 
-func replaceChain(newBlocks [] Block) {
+func replaceChain(newBlocks [] model.Block) {
 	if len(newBlocks) > len(Blockchain) {
 		Blockchain = newBlocks;
 	}

@@ -8,9 +8,7 @@ import (
 	"time"
 );
 
-type Block model.Block;
-
-func CalculateHash(block Block) string {
+func CalculateHash(block model.Block) string {
 	content := strconv.Itoa(block.BPM) + strconv.Itoa(block.Index) + block.Timestamp + block.PrevHash;
 	sha := sha256.New();
 	sha.Write([]byte(content));
@@ -18,8 +16,8 @@ func CalculateHash(block Block) string {
 	return hex.EncodeToString(hashed);
 }
 
-func GenerateBlock(oldBlock Block, BPM int) (Block, error) {
-	var block Block;
+func GenerateBlock(oldBlock model.Block, BPM int) (model.Block, error) {
+	var block model.Block;
 	block.BPM = BPM;
 	block.Index = oldBlock.Index + 1;
 	block.PrevHash = oldBlock.Hash;
@@ -28,7 +26,7 @@ func GenerateBlock(oldBlock Block, BPM int) (Block, error) {
 	return block, nil;
 }
 
-func isValidBlock(newBlock, oldBlock Block) bool {
+func isValidBlock(newBlock, oldBlock model.Block) bool {
 	if newBlock.Index != oldBlock.Index+1 {
 		return false;
 	}
