@@ -11,6 +11,7 @@ import (
 	"time"
 	"encoding/json"
 	"io"
+	"github.com/davecgh/go-spew/spew"
 )
 
 
@@ -33,6 +34,7 @@ func initialGenesisBlock() {
 	genesis.PrevHash = "0000000000000000000000000000000000000000000000000000000000000000"
 	genesis.Hash = generator.CalculateHash(genesis);
 	Blockchain = append(Blockchain, genesis);
+	spew.Dump(genesis)
 }
 
 func replaceChain(newBlocks [] model.Block) {
