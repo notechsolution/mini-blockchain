@@ -1,16 +1,14 @@
 package generator
 
 import (
-	"reflect"
 	"testing"
 
-	"../model"
-	"go/doc"
 )
+
 
 func TestCalculateHash(t *testing.T) {
 	type args struct {
-		block model.Block
+		block Block
 	}
 	tests := []struct {
 		name string
@@ -20,7 +18,7 @@ func TestCalculateHash(t *testing.T) {
 		{
 			name: "generate hash string correctly",
 			args: args{
-				block: model.Block{
+				block: Block{
 					BPM:       10,
 					Index:     6,
 					Timestamp: "2334455666",
