@@ -21,8 +21,14 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
+	go initialGenesisBlock();
 	run();
+}
+
+func initialGenesisBlock() {
+	var genesis Block;
+	genesis.Index = 0;
+
 }
 
 func replaceChain(newBlocks [] Block) {
@@ -56,6 +62,7 @@ func makeMuxRouter() http.Handler {
 	return muxRouter;
 }
 func handleGetBlockchain(writer http.ResponseWriter, request *http.Request) {
+	log.Printf("[%s]Receiced request '%s' ", "handleGetBlockchain", request.RequestURI);
 	bytes, err := json.MarshalIndent(Blockchain,"", " ");
 	if err != nil {
 		http.Error(writer,err.Error(), http.StatusInternalServerError);
