@@ -31,7 +31,7 @@ func initialGenesisBlock() {
 	genesis.Index = 0;
 	genesis.BPM = 0;
 	genesis.Timestamp = time.Now().String();
-	genesis.PrevHash = "0000000000000000000000000000000000000000000000000000000000000000"
+	genesis.PrevHash = os.Getenv("PARENTHASH");
 	genesis.Hash = generator.CalculateHash(genesis);
 	Blockchain = append(Blockchain, genesis);
 	spew.Dump(genesis)
