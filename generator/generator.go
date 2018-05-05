@@ -26,7 +26,7 @@ func GenerateBlock(oldBlock model.Block, BPM int) (model.Block, error) {
 	return block, nil;
 }
 
-func isValidBlock(newBlock, oldBlock model.Block) bool {
+func IsValidBlock(newBlock, oldBlock model.Block) bool {
 	if newBlock.Index != oldBlock.Index+1 {
 		return false;
 	}
