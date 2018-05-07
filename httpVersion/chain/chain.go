@@ -4,8 +4,8 @@ import (
 	"time"
 	"os"
 	"github.com/davecgh/go-spew/spew"
-	"../generator"
-	"../model"
+	"../../generator"
+	"../../model"
 )
 
 var blockchain []model.Block;

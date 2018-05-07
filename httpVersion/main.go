@@ -9,7 +9,7 @@ import (
 
 
 func main() {
-	err := godotenv.Load("config.env")
+	err := godotenv.Load("./httpVersion/config.env")
 	if err != nil {
 		log.Fatal(err)
 	}
