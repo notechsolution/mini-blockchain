@@ -18,6 +18,7 @@ var bcServer chan []model.Block;
 func Run() {
 	bcServer = make(chan [] model.Block);
 	tcpPort := os.Getenv("TCP_PORT");
+	log.Printf("TCP listening on %s\n", tcpPort);
 	server, err := net.Listen("tcp", ":"+tcpPort);
 	if err != nil {
 		log.Fatal(err);
@@ -56,10 +57,13 @@ func handleConnection(conn net.Conn) {
 	}();
 	go broadcast(conn);
 
+	// the channel here has 2 purpose, one is to handle concurrent transaction,
+	// the other one is to make the main process alive, and the goroutines alive
 	for _ = range bcServer {
 		spew.Dump(networkChain.GetAllBlocks())
 	}
 }
+
 func broadcast(conn net.Conn) {
 	for {
 		time.Sleep(10 * time.Second);
