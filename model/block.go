@@ -6,4 +6,6 @@ type Block struct {
 	Timestamp string;
 	Hash string;
 	PrevHash string;
+	Difficulty int;
+	Nonce string;
 }
