@@ -6,6 +6,7 @@ import (
 	"github.com/davecgh/go-spew/spew"
 	"../../generator"
 	"../../model"
+	"strconv"
 )
 
 var blockchain []model.Block;
@@ -31,8 +32,10 @@ func ReplaceChain(newBlocks [] model.Block) {
 }
 
 func CreateNewBlock(BPM int) (model.Block, error) {
+	difficulty,_ := strconv.Atoi(os.Getenv("difficulty"));
+
 	previousBlock := blockchain[len(blockchain)-1];
-	newBlock, err:=generator.GenerateBlock(previousBlock, BPM);
+	newBlock, err:=generator.GenerateBlockWithDifficulty(previousBlock, BPM, difficulty);
 	if err !=nil {
 		return newBlock, err;
 	}
